@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
 
 namespace CA.WordUnscrambler
 {
     class Program
     {
-        private const string dictionaryFileName = "0_palabras_todas.txt";
+
+        private const string pathToDictionary = @"Data\Dictionary.txt";
         private static Dictionary<int, string> mainDictionary;
         private static Dictionary<string, List<string>> helperDictionary;
 
@@ -21,7 +20,7 @@ namespace CA.WordUnscrambler
             // 3   - abaá
             mainDictionary = new Dictionary<int, string>();
 
-            string[] allWords = File.ReadAllLines(dictionaryFileName);
+            string[] allWords = File.ReadAllLines(pathToDictionary);
 
             int L = allWords.Length;
             for (int i = 0; i < L; i++)
@@ -114,7 +113,7 @@ namespace CA.WordUnscrambler
             char[] ch = inWord.ToCharArray();
             Array.Sort(ch);
 
-            // Find key in refDictionary
+            // Find key in helperDictionary
             string key = new string(ch);
             helperDictionary.TryGetValue(key, out matchedWords);
 
